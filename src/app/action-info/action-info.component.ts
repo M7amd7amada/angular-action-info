@@ -9,7 +9,7 @@ import { ApiServiceService } from '../api-service.service';
 export class ActionInfoComponent implements OnInit {
   constructor(private service: ApiServiceService) {}
 
-  ActionInfoList: any = this.service.getActionInfo();
+  ActionInfoList: any = [];
   ModelTitle = 'Loading';
 
   ngOnInit(): void {
@@ -19,6 +19,7 @@ export class ActionInfoComponent implements OnInit {
   refresh() {
     this.service.getActionInfo().subscribe((data) => {
       this.ActionInfoList = data;
+      console.log(data);
     });
   }
 }

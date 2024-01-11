@@ -1,1 +1,27 @@
-<div>{{ ActionInfoList | json }}</div>
+<div class="container mt-4">
+    <div *ngFor="let controller of ActionInfoList | keyvalue" class="card mb-3">
+        <div class="card-header">
+            <h3 class="mb-0">{{ controller.key }}</h3>
+        </div>
+        <div class="card-body">
+            <div *ngIf="controller.value">
+                <p class="font-weight-bold mb-0">
+                    {{ ((controller.value | keyvalue)[0]).key.toUpperCase() }}:
+                    {{ ((controller.value | keyvalue)[0]).value }}
+                </p>
+                <ul class="list-group mt-2">
+                    <li *ngFor="let statusCode of (controller.value | keyvalue).slice(1)" class="list-group-item">
+                        <p class="font-weight-bold mb-0">
+                            {{ statusCode.key.toUpperCase() }}:
+                        </p>
+                        <ul class="list-group mt-2">
+                            <li *ngFor="let code of (statusCode.value | keyvalue)" class="list-group-item">
+                                {{ code.key }} : {{ code.value }}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
